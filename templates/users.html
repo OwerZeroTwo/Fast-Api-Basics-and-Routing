@@ -1,0 +1,42 @@
+{% extends 'index.html'%}
+{% block crud_container %}
+    <section class="container-fluid">
+        <h2 align="center">Пользователи</h2>
+        <br>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя пользователя</th>
+                <th>Возраст</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.age }}</td>
+                    <td>
+                        <a href="{{ url_for('update_user', user_id=user.id) }}">Обновить</a>
+                        <a href="{{ url_for('delete_user', user_id=user.id) }}">Удалить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <form method="post">
+            <div class="form-group">
+                <label for="username">Имя пользователя:</label>
+                <input type="text" class="form-control" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="age">Возраст:</label>
+                <input type="number" class="form-control" id="age" name="age">
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+    </section>
+{% endblock %}
